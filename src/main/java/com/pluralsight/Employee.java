@@ -1,11 +1,15 @@
 package com.pluralsight;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Employee {
     private int employeeId;
     private String name;
     private String department;
     private double payRate;
-    private double hoursWorked;
+    private LocalDateTime startTime;
+      private LocalDateTime endTime;
 
     public int getEmployeeId() {
         return employeeId;
@@ -22,9 +26,10 @@ public class Employee {
     public double getPayRate() {
         return payRate;
     }
-
+    //turning get hours worked into a derived getter that returns hours based on start and end time
     public double getHoursWorked() {
-        return hoursWorked;
+        Duration hoursWorked = Duration.between(startTime, endTime);
+        return hoursWorked.toMinutes() /60.0;
     }
     //derived getters
     public double getTotalPay() {
@@ -60,10 +65,25 @@ public class Employee {
         this.payRate = payRate;
     }
 
-    public void setHoursWorked(double hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
-}
 
 //methods
-//this class stores and calculates payroll info abt info
+//punch in method, uses time.now to set time
+    public void punchIn() {
+        if(this.startTime != null) {
+            System.out.println("You have already punched in");
+        } else {
+            this.startTime = LocalDateTime.now();
+            System.out.println("Punch in successful");
+        }
+    }
+//punch out method
+    public void punchOut() {
+        if (this.startTime == null) {
+            System.out.println("You have not punched in");
+        } else {
+            this.endTime = LocalDateTime.now();
+            System.out.println("You have punched out. Go be happy now");
+        }
+    }
+
+}

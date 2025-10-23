@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+//properties of a room
 public class Room {
     private int roomNumber;
     private String roomType;
@@ -9,6 +10,7 @@ public class Room {
     private String theme;
 
 
+    //getters
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -30,6 +32,7 @@ public class Room {
         return numOfBeds;
     }
 
+    //derived getters
     //this getter returns a boolean, if not occupied and room is clean: true, if no: false
     public boolean isAvailable() {
         return !isOccupied && isClean;
@@ -53,6 +56,7 @@ public class Room {
         return theme;
     }
 
+    //setters
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
@@ -79,6 +83,7 @@ public class Room {
     }
 
 
+    //constructor
     public Room(int roomNumber, String roomType, boolean isClean, boolean isOccupied, int numOfBeds, String theme) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
@@ -88,5 +93,28 @@ public class Room {
         this.theme = theme;
     }
 
+    //methods
+
+    //check in method: sets isOccupied = true, sets isClean = false (upates)
+    public void checkIn() {
+        if(!this.isOccupied) {
+            this.isOccupied = true;
+            this.isClean = false;
+
+        } else {
+            System.out.println("This room is unavailable");
+        }
+    }
+
+
+    //check out method: sets is occupied = false, dirty remains the same
+    public void checkOut() {
+        this.isOccupied = false;
+    }
+
+    // clean room method: sets room to is clean
+    public void cleanRoom() {
+        this.isClean = true;
+    }
 
 }
